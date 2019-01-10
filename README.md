@@ -1,7 +1,7 @@
 # NewSettlers4Project
 A remake of The Settlers IV: *The New Settlers IV* - a copy of the original game with extra features. New features are meant to improve the game without changing the basis.
 
-##What are the targets?
+## What are the targets?
 - create an open game which works and looks like The Settlers IV (well-optimised, imitator of S4)
 - using original files (textures, sounds, maps)
 - making interface very similar to the original one but better, HD
@@ -25,6 +25,6 @@ A remake of The Settlers IV: *The New Settlers IV* - a copy of the original game
 
 
 
-##Are you interested in the project?
+## Are you interested in the project?
 
 I am more game designer than programmer. I can program, however when it comes to complex maths calculations like rendering the triangles in Settlers III or IV, I feel lost. If you want to help, then join the project and let's make an open, free version of Settlers IV with extras.
