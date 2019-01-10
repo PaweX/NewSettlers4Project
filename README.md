@@ -24,4 +24,5 @@ A remake of The Settlers IV: *The New Settlers IV* - a copy of the orginal game 
 
 
 **Are you interested in the project?**
+
 I am more game designer than programmer. I can program, however when it comes to complex math calculations like rendering the triangles in Settlers III or IV, I feel lost. If you want to help, then join the project and let's make an open, free version of Settlers IV with extras.
