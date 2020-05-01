@@ -22,8 +22,8 @@ A remake of The Settlers IV: *The New Settlers IV* - a copy of the original game
 - playable Dark Tribe
 - more advanced map editor that is compatible with the original one as much as possible
 
-
-
+## Discord Server - Settlers IV Modding
+https://discord.gg/qsetQRb
 
 ## Are you interested in the project?
 
