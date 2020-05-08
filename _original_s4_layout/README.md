@@ -1,4 +1,6 @@
 # Original folders and files structure of The Settlers IV
+This is for informational purposes only. These files are blank.
+
 ## DLL's and EXE files
 ### Exports:
 * **Exe/bb_support.dll:**
