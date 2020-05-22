@@ -17,25 +17,41 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
-#ifndef H_SHAREDEFS
-#define H_SHAREDEFS
+#ifndef H_RENDERING_MEDIATOR
+#define H_RENDERING_MEDIATOR
+
+#include "sharedefs.h"
+
+
+class CGraphicsManager;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Here are all shared definitions for all the classes
+// DESCRIPTION: This class is translating common rendering functions to a loaded API. It stands
+// between program and loaded API. It is responsible for talking to an API that is currently
+// loaded. Before this class the program is not bothered and doesn't know which API is used.
+// ------------
+// EXTRA INFO: Constructor throws an exception of type 'ExceptionNr' when the instance already exists.
+// Method GetInstance() throws an exception of type 'ExceptionNr' when the object is not existing.
+// The only one instance of this class is created and deleted by CGraphicsManager.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-const enum ExceptionNr
+//// SINGLETON CLASS ////
+class CRenderingMediator
 {
-	except_UNKNOWN_EXCEPTION = 0,
+private: // Fields
+	static CRenderingMediator* instance; // The instance
 
-	except_GAME_APP_ALREADY_EXISTS = 1,
-	except_GAME_APP_NOT_CREATED,
-	except_GRAPHICS_MANAGER_ALREADY_EXISTS,
-	except_GRAPHICS_MANAGER_NOT_CREATED,
-	except_RENDERING_MEDIATOR_ALREADY_EXISTS,
-	except_RENDERING_MEDIATOR_NOT_CREATED,
+private: // Methods 
+	// Friends:
+	friend CGraphicsManager::CGraphicsManager();
+	friend CGraphicsManager::~CGraphicsManager();
 
-	except_COUNT // must be last
+	CRenderingMediator(); // Constructor
+	~CRenderingMediator() { instance = nullptr; } // Destructor
+	
+public: // Methods
+	//static CRenderingMediator* GetInstance();
+
 };
 
-#endif // H_SHAREDEFS
+
+#endif // H_RENDERING_MEDIATOR

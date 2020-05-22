@@ -19,15 +19,16 @@
 #include "Messages.h"
 #include "GameApplication.h"
 #include "GraphicsManager.h"
+#include "RenderingMediator.h"
 
 //----------------------------------------------------------------
 CGraphicsManager* CGraphicsManager::instance = nullptr;
+CRenderingMediator* CGraphicsManager::renderingMediator = nullptr;
 
 
 //----------------------------------------------------------------
-// CONSTRUCTORS
+// CONSTRUCTOR
 //----------------------------------------------------------------
-
 CGraphicsManager::CGraphicsManager()
 {
 	// Check if the instance is null and save it.
@@ -35,6 +36,33 @@ CGraphicsManager::CGraphicsManager()
 		throw except_GRAPHICS_MANAGER_ALREADY_EXISTS;
 	else
 		instance = this;
+
+
+	// Create Rendering Mediator
+	try
+	{
+		renderingMediator = new CRenderingMediator();
+	}
+	catch (ExceptionNr exc)
+	{
+		// Display exception error message
+		MESSAGE::Exception(exc, __FILENAME__);
+	}
+}
+//----------------------------------------------------------------
+
+//----------------------------------------------------------------
+// DESTRUCTOR
+//----------------------------------------------------------------
+CGraphicsManager::~CGraphicsManager()
+{
+	// Remove Rendering Mediator
+	if (renderingMediator != nullptr)
+		delete renderingMediator;
+
+
+	// At the end clear pointer of this instance
+	instance = nullptr;
 }
 //----------------------------------------------------------------
 
@@ -44,13 +72,13 @@ CGraphicsManager::CGraphicsManager()
 //----------------------------------------------------------------
 
 // GetInstance method
-CGraphicsManager* CGraphicsManager::GetInstance()
+/*CGraphicsManager* CGraphicsManager::GetInstance()
 {
 	if (instance == nullptr)
 		throw except_GRAPHICS_MANAGER_NOT_CREATED;
 	else
 		return CGraphicsManager::instance;
-}
+}*/
 //----------------------------------------------------------------
 
 

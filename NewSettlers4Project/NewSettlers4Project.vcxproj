@@ -21,14 +21,20 @@
   <ItemGroup>
     <ClCompile Include="Source\GameApplication.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
+    <ClCompile Include="Source\Graphics\RenderingMediator.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Tools\Messages.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\GameApplication.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
+    <ClInclude Include="Source\Graphics\RenderingMediator.h" />
     <ClInclude Include="Source\sharedefs.h" />
     <ClInclude Include="Source\Tools\Messages.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NewSettlers4Project1.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -88,22 +94,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(GLFW_WIN32_DIR)\lib-vc2017;$(GLEW_DIR)\lib\Release\Win32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Graphics\API;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(GLFW_WIN32_DIR)\lib-vc2017;$(GLEW_DIR)\lib\Release\Win32;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Graphics\API;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Graphics\API;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\Source;$(ProjectDir)\Source\Tools;$(ProjectDir)\Source\Graphics;$(ProjectDir)\Source\Graphics\API;$(ProjectDir)\Source\Logic;$(ProjectDir)\Source\Files;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

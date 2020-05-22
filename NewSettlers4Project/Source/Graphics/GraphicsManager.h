@@ -24,6 +24,7 @@
 
 
 class CGameApplication;
+class CRenderingMediator;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: This class stands between the main game class and other graphics classes. They are
@@ -36,8 +37,14 @@ class CGameApplication;
 //// SINGLETON CLASS ////
 class CGraphicsManager
 {
+	// Friend classes
+	friend class CRenderingMediator;
+
 private: // Fields
 	static CGraphicsManager* instance; // The instance
+
+		// dependent singletons
+	static CRenderingMediator* renderingMediator; // The instance of CRenderingMediator
 
 private: // Methods 
 	// Friends:
@@ -45,10 +52,10 @@ private: // Methods
 	friend CGameApplication::~CGameApplication();
 
 	CGraphicsManager(); // Constructor
-	~CGraphicsManager() { instance = nullptr; } // Destructor
+	~CGraphicsManager(); // Destructor
 	
 public: // Methods
-	static CGraphicsManager* GetInstance();
+	//static CGraphicsManager* GetInstance();
 
 };
 

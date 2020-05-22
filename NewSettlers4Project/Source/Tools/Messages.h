@@ -33,7 +33,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Class for displaying error, warning and debug messages.
-// This class contains of static fields and methods and doesn't create any objects.
+// This class contains static fields and methods and doesn't create any objects.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class MESSAGE
 {
@@ -64,7 +64,10 @@ private:
 
 		const char* GetExcText(unsigned &index) const
 		{
-			return excMessagesArray[index];
+			if (excMessagesArray[index] == NULL)
+				return "ExceptionMessages: No Text!";
+			else
+				return excMessagesArray[index];
 		}
 	};
 
@@ -86,6 +89,11 @@ public:
 	static void Error(const char* errorString, const char* cppFileName = "", ...);
 	static void Exception(ExceptionNr excIndex, const char* cppFileName = "");
 	static void Exception(const char* errorString, const char* cppFileName = "", ...);
+
+
+private:
+	MESSAGE() {};
+	~MESSAGE() {};
 };
 
 
