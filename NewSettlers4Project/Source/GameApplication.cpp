@@ -16,22 +16,53 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
+#include "Messages.h"
 #include "GameApplication.h"
+#include "GraphicsManager.h"
+
 
 //----------------------------------------------------------------
 CGameApplication* CGameApplication::instance = nullptr;
+CGraphicsManager* CGameApplication::graphicsManager = nullptr;
 
 
 //----------------------------------------------------------------
-// CONSTRUCTORS
+// CONSTRUCTOR
 //----------------------------------------------------------------
-
 CGameApplication::CGameApplication()
 {
+	// Check if the instance is null and save it.
 	if (instance != nullptr)
 		throw except_GAME_APP_ALREADY_EXISTS;
 	else
 		instance = this;
+
+
+	// Create Graphics Manager
+	try
+	{
+		graphicsManager = new CGraphicsManager();
+	}
+	catch (ExceptionNr exc)
+	{
+		// Display exception error message
+		MESSAGE::Exception(exc, __FILENAME__);
+	}
+}
+//----------------------------------------------------------------
+
+//----------------------------------------------------------------
+// DESTRUCTOR
+//----------------------------------------------------------------
+CGameApplication::~CGameApplication()
+{
+	// Remove Graphics Manager
+	if (graphicsManager != nullptr)
+		delete graphicsManager;
+
+
+	// At the end clear pointer of this instance
+	instance = nullptr;
 }
 //----------------------------------------------------------------
 

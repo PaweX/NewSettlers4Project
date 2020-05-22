@@ -178,10 +178,10 @@ void MESSAGE::Exception(ExceptionNr excIndex, const char* cppFileName)
 	Exception(GetExceptionMsg(excIndex), cppFileName);
 }
 
-void MESSAGE::Exception(const char* errorString, const char* cppFileName, ...)
+void MESSAGE::Exception(const char* exceptionString, const char* cppFileName, ...)
 {
 	va_list args;
-	va_start(args, errorString);
+	va_start(args, exceptionString);
 
 #ifndef _WIN32
 	printf("\033[1;37;41m"); // white color on red background
@@ -194,7 +194,7 @@ void MESSAGE::Exception(const char* errorString, const char* cppFileName, ...)
 	if (cppFileName != "")
 		printf("Caught in %s: ", cppFileName);
 
-	vprintf(errorString, args);
+	vprintf(exceptionString, args);
 	printf("\n");
 
 #ifndef _WIN32

@@ -28,7 +28,6 @@ int WINAPI WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
 int main(int argc, char **argv)
 #endif
 {
-	CGameApplication gameApdddp;
 	// Try to create the game application and start it
 	try
 	{

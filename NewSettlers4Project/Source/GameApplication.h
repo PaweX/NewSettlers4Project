@@ -22,22 +22,29 @@
 
 #include "sharedefs.h"
 
+
+class CGraphicsManager;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: It is a main game class. It rules the whole game (Graphics, Logic etc.).
 // ------------
-// EXTRA INFO: Constructor throws an exception of type 'Exception' when the instance already exists.
-// Method GetInstance() throws an exception of type 'Exception' when the object is not existing
+// EXTRA INFO: Constructor throws an exception of type 'ExceptionNr' when the instance already exists.
+// Method GetInstance() throws an exception of type 'ExceptionNr' when the object is not existing
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //// SINGLETON CLASS ////
 class CGameApplication
 {
 private: // Fields
-	static CGameApplication* instance; // The instance
+	static CGameApplication* instance; // The instance of this class
+
+	// dependent singletons
+	static CGraphicsManager* graphicsManager; // The instance of CGraphicsManager
 
 private: // Methods 
 
 public: // Methods
 	CGameApplication(); // Constructor
+	~CGameApplication(); // Destructor
 
 	static CGameApplication* GetInstance();
 

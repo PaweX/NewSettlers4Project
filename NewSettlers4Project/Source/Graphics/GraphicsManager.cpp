@@ -17,6 +17,7 @@
 *******************************************************************************/
 
 #include "Messages.h"
+#include "GameApplication.h"
 #include "GraphicsManager.h"
 
 //----------------------------------------------------------------
@@ -29,6 +30,7 @@ CGraphicsManager* CGraphicsManager::instance = nullptr;
 
 CGraphicsManager::CGraphicsManager()
 {
+	// Check if the instance is null and save it.
 	if (instance != nullptr)
 		throw except_GRAPHICS_MANAGER_ALREADY_EXISTS;
 	else
