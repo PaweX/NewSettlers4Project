@@ -1,4 +1,3 @@
-#pragma once
 /////////////////////////////////////////////////////////////////
 //////////////////// New Settlers IV Project ////////////////////
 /////////////////////////////////////////////////////////////////
@@ -17,37 +16,44 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
-#ifndef H_SHAREDEFS
-#define H_SHAREDEFS
+#include "Messages.h"
+//#include "GameApplication.h"
+//#include "GraphicsManager.h"
+//#include "RenderingMediator.h"
+#include "BaseRenderingAPI.h"
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Here are all shared definitions for all the classes
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------
+CBaseRenderingAPI* CBaseRenderingAPI::instance = nullptr;
 
-const enum ExceptionNr
+
+//----------------------------------------------------------------
+// CONSTRUCTOR
+//----------------------------------------------------------------
+CBaseRenderingAPI::CBaseRenderingAPI()
 {
-	except_UNKNOWN_EXCEPTION = 0,
+	// Check if the instance is null and save it.
+	if (instance != nullptr)
+		throw except_A_RENDERING_API_ALREADY_EXISTS;
+	else
+		instance = this;
+}
+//----------------------------------------------------------------
 
-	except_GAME_APP_ALREADY_EXISTS = 1,
-	except_GAME_APP_NOT_CREATED,
-	except_GRAPHICS_MANAGER_ALREADY_EXISTS,
-	except_GRAPHICS_MANAGER_NOT_CREATED,
-	except_RENDERING_MEDIATOR_ALREADY_EXISTS,
-	except_RENDERING_MEDIATOR_NOT_CREATED,
-	except_A_RENDERING_API_ALREADY_EXISTS,
-	except_A_RENDERING_API_NOT_CREATED,
 
-	except_COUNT // must be last
-};
+//----------------------------------------------------------------
+// Public Methods
+//----------------------------------------------------------------
 
-const enum API_Type
+// GetInstance method
+/*CBaseRenderingAPI* CBaseRenderingAPI::GetInstance()
 {
-	API_CURRENT_API,
+	if (instance == nullptr)
+		throw except_A_RENDERING_API_NOT_CREATED;
+	else
+		return CBaseRenderingAPI::instance;
+}*/
+//----------------------------------------------------------------
 
-	API_OpenGl,
-	API_Vulkan,
-	API_DirectX
-};
 
 
-#endif // H_SHAREDEFS
+//----------------------------------------------------------------

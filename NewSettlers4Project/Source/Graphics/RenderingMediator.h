@@ -24,6 +24,7 @@
 
 
 class CGraphicsManager;
+class CBaseRenderingAPI;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: This class is translating common rendering functions to a loaded API. It stands
@@ -40,17 +41,25 @@ class CRenderingMediator
 private: // Fields
 	static CRenderingMediator* instance; // The instance
 
+	// dependent singletons
+	static CBaseRenderingAPI* renderingAPI; // The instance of the current Rendering API class
+
 private: // Methods 
 	// Friends:
 	friend CGraphicsManager::CGraphicsManager();
 	friend CGraphicsManager::~CGraphicsManager();
 
 	CRenderingMediator(); // Constructor
-	~CRenderingMediator() { instance = nullptr; } // Destructor
+	~CRenderingMediator(); // Destructor
+
 	
+	void CreateRenderingAPI(API_Type apiType = API_CURRENT_API);
+	void RemoveRenderingAPI();
+
 public: // Methods
 	//static CRenderingMediator* GetInstance();
 
+	void ChangeRenderingAPI(API_Type apiType); // Removes current API and creates new one
 };
 
 

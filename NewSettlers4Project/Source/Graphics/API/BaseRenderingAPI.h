@@ -17,37 +17,38 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
-#ifndef H_SHAREDEFS
-#define H_SHAREDEFS
+#ifndef H_BASE_RENDERING_API
+#define H_BASE_RENDERING_API
+
+#include "sharedefs.h"
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: Here are all shared definitions for all the classes
+// DESCRIPTION: This is a base class of all rendering APIs classes. But this class doesn't create
+// any objects (it is PURE VIRTUAL). It is managed by the Rendering Mediator.
+// ------------
+// EXTRA INFO: Constructor throws an exception of type 'ExceptionNr' when the instance already exists.
+// Method GetInstance() throws an exception of type 'ExceptionNr' when the object is not existing.
+// The only one instance of all inheriting classes is created and deleted by CRenderingMediator.
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-const enum ExceptionNr
+//// SINGLETON CLASS - but only from inheriting classes ////
+//// ONLY ONE OBJECT OF ALL INHERITING CLASSES IS ALLOWED AT ONE TIME ////
+class CBaseRenderingAPI
 {
-	except_UNKNOWN_EXCEPTION = 0,
+	// Friends:
+	friend class CRenderingMediator;
 
-	except_GAME_APP_ALREADY_EXISTS = 1,
-	except_GAME_APP_NOT_CREATED,
-	except_GRAPHICS_MANAGER_ALREADY_EXISTS,
-	except_GRAPHICS_MANAGER_NOT_CREATED,
-	except_RENDERING_MEDIATOR_ALREADY_EXISTS,
-	except_RENDERING_MEDIATOR_NOT_CREATED,
-	except_A_RENDERING_API_ALREADY_EXISTS,
-	except_A_RENDERING_API_NOT_CREATED,
+private: // Fields
+	static CBaseRenderingAPI* instance; // The only one instance considering all inheriting classes.
 
-	except_COUNT // must be last
-};
+protected: // Methods 
+	CBaseRenderingAPI(); // Constructor
+	virtual ~CBaseRenderingAPI() { instance = nullptr; } // Destructor
+	
+public: // Methods
+	//static CRenderingMediator* GetInstance();
 
-const enum API_Type
-{
-	API_CURRENT_API,
-
-	API_OpenGl,
-	API_Vulkan,
-	API_DirectX
 };
 
 
-#endif // H_SHAREDEFS
+#endif // H_BASE_RENDERING_API

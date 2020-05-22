@@ -43,7 +43,7 @@ class CGraphicsManager
 private: // Fields
 	static CGraphicsManager* instance; // The instance
 
-		// dependent singletons
+	// dependent singletons
 	static CRenderingMediator* renderingMediator; // The instance of CRenderingMediator
 
 private: // Methods 
