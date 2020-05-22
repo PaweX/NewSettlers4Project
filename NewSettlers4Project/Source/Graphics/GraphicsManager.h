@@ -17,32 +17,30 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
-#ifndef H_GAME_APPLICATION
-#define H_GAME_APPLICATION
+#ifndef H_GRAPHICS_MANAGER
+#define H_GRAPHICS_MANAGER
 
 #include "sharedefs.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: It is a main game class. It rules the whole game (Graphics, Logic etc.).
+// DESCRIPTION: 
 // ------------
-// EXTRA INFO: Constructor throws an exception of type 'Exception' when the instance already exists.
-// Method GetInstance() throws an exception of type 'Exception' when the object is not existing
+// EXTRA INFO: 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //// SINGLETON CLASS ////
-class CGameApplication
+class CGraphicsManager
 {
 private: // Fields
-	static CGameApplication* instance; // The instance
+	static CGraphicsManager* instance; // The instance
 
 private: // Methods 
 
 public: // Methods
-	CGameApplication(); // Constructor
+	CGraphicsManager(); // Constructor
 
-	static CGameApplication* GetInstance();
+	static CGraphicsManager* GetInstance();
 
-	void StartAndRun();
 };
 
 
-#endif // H_GAME_APPLICATION
+#endif // H_GRAPHICS_MANAGER

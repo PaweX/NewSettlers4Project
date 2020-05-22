@@ -24,12 +24,14 @@
 // DESCRIPTION: Here are all shared definitions for all the classes
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-enum Exception
+const enum ExceptionNr
 {
 	except_UNKNOWN_EXCEPTION = 0,
 
 	except_GAME_APP_ALREADY_EXISTS = 1,
 	except_GAME_APP_NOT_CREATED,
+	except_GRAPHICS_MANAGER_ALREADY_EXISTS,
+	except_GRAPHICS_MANAGER_NOT_CREATED,
 
 	except_COUNT // must be last
 };

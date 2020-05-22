@@ -21,6 +21,15 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include <string.h>
+#include "sharedefs.h"
+
+#ifdef _WIN32
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+#else
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#endif
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: Class for displaying error, warning and debug messages.
@@ -36,11 +45,47 @@ private:
 
 	//static bool bUseInGameConsole;
 
+private:
+	// This structure is containing text messages for exceptions.
+	struct ExceptionMessages
+	{
+		const char* excMessagesArray[except_COUNT];
+
+		// Constructor
+		constexpr ExceptionMessages() : excMessagesArray()
+		{
+			excMessagesArray[except_UNKNOWN_EXCEPTION]					= "Unknown exception!";
+			excMessagesArray[except_GAME_APP_ALREADY_EXISTS]			= "CGameApplication instance already existing!";
+			excMessagesArray[except_GAME_APP_NOT_CREATED]				= "CGameApplication instance not existing!";
+			excMessagesArray[except_GRAPHICS_MANAGER_ALREADY_EXISTS]	= "CGraphicsManager instance already existing!";
+			excMessagesArray[except_GRAPHICS_MANAGER_NOT_CREATED]		= "CGraphicsManager instance not existing!";
+		}
+
+
+		const char* GetExcText(unsigned &index) const
+		{
+			return excMessagesArray[index];
+		}
+	};
+
+	static const ExceptionMessages excMessages;
+
+public: // Fields
+
+
 public:
-	static void Normal(const char * msgString, ...);
-	static void Info(const char * msgString, ...);
-	static void Warning(const char * warnString, ...);
-	static void Error(const char * errorString, ...);
+	static const char* GetExceptionMsg(unsigned msgIndex) { return excMessages.GetExcText(msgIndex); }
+
+	static void Normal(ExceptionNr excIndex, const char* cppFileName = "");
+	static void Normal(const char* msgString, const char* cppFileName = "", ...);
+	static void Info(ExceptionNr excIndex, const char* cppFileName = "");
+	static void Info(const char* msgString, const char* cppFileName = "", ...);
+	static void Warning(ExceptionNr excIndex, const char* cppFileName = "");
+	static void Warning(const char* warnString, const char* cppFileName = "", ...);
+	static void Error(ExceptionNr excIndex, const char* cppFileName = "");
+	static void Error(const char* errorString, const char* cppFileName = "", ...);
+	static void Exception(ExceptionNr excIndex, const char* cppFileName = "");
+	static void Exception(const char* errorString, const char* cppFileName = "", ...);
 };
 
 

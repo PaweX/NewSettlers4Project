@@ -1,4 +1,3 @@
-#pragma once
 /////////////////////////////////////////////////////////////////
 //////////////////// New Settlers IV Project ////////////////////
 /////////////////////////////////////////////////////////////////
@@ -17,32 +16,41 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
-#ifndef H_GAME_APPLICATION
-#define H_GAME_APPLICATION
+#include "Messages.h"
+#include "GraphicsManager.h"
 
-#include "sharedefs.h"
+//----------------------------------------------------------------
+CGraphicsManager* CGraphicsManager::instance = nullptr;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// DESCRIPTION: It is a main game class. It rules the whole game (Graphics, Logic etc.).
-// ------------
-// EXTRA INFO: Constructor throws an exception of type 'Exception' when the instance already exists.
-// Method GetInstance() throws an exception of type 'Exception' when the object is not existing
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//// SINGLETON CLASS ////
-class CGameApplication
+
+//----------------------------------------------------------------
+// CONSTRUCTORS
+//----------------------------------------------------------------
+
+CGraphicsManager::CGraphicsManager()
 {
-private: // Fields
-	static CGameApplication* instance; // The instance
-
-private: // Methods 
-
-public: // Methods
-	CGameApplication(); // Constructor
-
-	static CGameApplication* GetInstance();
-
-	void StartAndRun();
-};
+	if (instance != nullptr)
+		throw except_GRAPHICS_MANAGER_ALREADY_EXISTS;
+	else
+		instance = this;
+}
+//----------------------------------------------------------------
 
 
-#endif // H_GAME_APPLICATION
+//----------------------------------------------------------------
+// Public Methods
+//----------------------------------------------------------------
+
+// GetInstance method
+CGraphicsManager* CGraphicsManager::GetInstance()
+{
+	if (instance == nullptr)
+		throw except_GRAPHICS_MANAGER_NOT_CREATED;
+	else
+		return CGraphicsManager::instance;
+}
+//----------------------------------------------------------------
+
+
+
+//----------------------------------------------------------------

@@ -17,8 +17,8 @@
 *******************************************************************************/
 
 
+#include "Messages.h"
 #include "GameApplication.h"
-#include "Tools/Messages.h"
 
 #if (defined(_WIN32) || defined(_WIN64)) && !defined(_DEBUG)
 #include "windows.h"
@@ -28,16 +28,17 @@ int WINAPI WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
 int main(int argc, char **argv)
 #endif
 {
+	CGameApplication gameApdddp;
 	// Try to create the game application and start it
 	try
 	{
 		CGameApplication gameApp;
 		gameApp.StartAndRun();
 	}
-	catch (Exception exc)
+	catch (ExceptionNr exc)
 	{
-		if (exc == except_GAME_APP_ALREADY_EXISTS)
-			MESSAGE::Error("Main.cpp: Game application was already created, it can't be created again!");
+		// Display exception error message
+		MESSAGE::Exception(exc, __FILENAME__);
 	}
 
 	return 0;

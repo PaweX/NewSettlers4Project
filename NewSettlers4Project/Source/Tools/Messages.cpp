@@ -29,6 +29,9 @@ HANDLE MESSAGE::hConsole = nullptr;
 //bool MESSAGE::bUseInGameConsole = false;
 
 
+constexpr MESSAGE::ExceptionMessages MESSAGE::excMessages = MESSAGE::ExceptionMessages();
+
+
 //----------------------------------------------------------------
 // Private methods
 //----------------------------------------------------------------
@@ -46,12 +49,21 @@ HANDLE MESSAGE::GetWindowsConsole()
 //----------------------------------------------------------------
 // Public methods
 //----------------------------------------------------------------
-void MESSAGE::Normal(const char * msgString, ...)
+void MESSAGE::Normal(ExceptionNr excIndex, const char* cppFileName)
+{
+	Normal(GetExceptionMsg(excIndex));
+}
+
+void MESSAGE::Normal(const char* msgString, const char* cppFileName, ...)
 {
 	va_list args;
 	va_start(args, msgString);
 
 	//printf("Message: ");
+
+	if (cppFileName != "")
+		printf("%s: ", cppFileName);
+
 	vprintf(msgString, args);
 	printf("\n");
 
@@ -59,7 +71,12 @@ void MESSAGE::Normal(const char * msgString, ...)
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Info(const char * infoString, ...)
+void MESSAGE::Info(ExceptionNr excIndex, const char* cppFileName)
+{
+	Info(GetExceptionMsg(excIndex));
+}
+
+void MESSAGE::Info(const char* infoString, const char* cppFileName, ...)
 {
 	va_list args;
 	va_start(args, infoString);
@@ -71,6 +88,10 @@ void MESSAGE::Info(const char * infoString, ...)
 #endif // ! _WIN32
 
 	//printf("INFORMATION: ");
+
+	if (cppFileName != "")
+		printf("%s: ", cppFileName);
+
 	vprintf(infoString, args);
 	printf("\n");
 
@@ -84,7 +105,12 @@ void MESSAGE::Info(const char * infoString, ...)
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Warning(const char * warnString, ...)
+void MESSAGE::Warning(ExceptionNr excIndex, const char* cppFileName)
+{
+	Warning(GetExceptionMsg(excIndex));
+}
+
+void MESSAGE::Warning(const char* warnString, const char* cppFileName, ...)
 {
 	va_list args;
 	va_start(args, warnString);
@@ -96,6 +122,10 @@ void MESSAGE::Warning(const char * warnString, ...)
 #endif // ! _WIN32
 
 	printf("WARNING: ");
+
+	if (cppFileName != "")
+		printf("%s: ", cppFileName);
+
 	vprintf(warnString, args);
 	printf("\n");
 
@@ -109,7 +139,12 @@ void MESSAGE::Warning(const char * warnString, ...)
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Error(const char * errorString, ...)
+void MESSAGE::Error(ExceptionNr excIndex, const char* cppFileName)
+{
+	Error(GetExceptionMsg(excIndex), cppFileName);
+}
+
+void MESSAGE::Error(const char* errorString, const char* cppFileName, ...)
 {
 	va_list args;
 	va_start(args, errorString);
@@ -121,6 +156,44 @@ void MESSAGE::Error(const char * errorString, ...)
 #endif // ! _WIN32
 
 	printf("ERROR: ");
+
+	if (cppFileName != "")
+		printf("%s: ", cppFileName);
+
+	vprintf(errorString, args);
+	printf("\n");
+
+#ifndef _WIN32
+	printf("\033[0m;"); // normal color
+#else
+	SetConsoleTextAttribute(GetWindowsConsole(), 7); // set color back to white in Windows console
+#endif // ! _WIN32
+
+	va_end(args);
+}
+//----------------------------------------------------------------
+
+void MESSAGE::Exception(ExceptionNr excIndex, const char* cppFileName)
+{
+	Exception(GetExceptionMsg(excIndex), cppFileName);
+}
+
+void MESSAGE::Exception(const char* errorString, const char* cppFileName, ...)
+{
+	va_list args;
+	va_start(args, errorString);
+
+#ifndef _WIN32
+	printf("\033[1;37;41m"); // white color on red background
+#else
+	SetConsoleTextAttribute(GetWindowsConsole(), 207); // set color to white on red background in Windows console
+#endif // ! _WIN32
+
+	printf("EXCEPTION: ");
+
+	if (cppFileName != "")
+		printf("Caught in %s: ", cppFileName);
+
 	vprintf(errorString, args);
 	printf("\n");
 
