@@ -44,16 +44,8 @@
     <ClInclude Include="Source\Graphics\GraphicsManager.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\RenderingMediator.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="NewSettlers4Project1.rc">
-      <Filter>Pliki zasobów</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

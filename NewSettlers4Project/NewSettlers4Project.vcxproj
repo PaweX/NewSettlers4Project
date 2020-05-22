@@ -26,15 +26,11 @@
     <ClCompile Include="Source\Tools\Messages.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\GameApplication.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\RenderingMediator.h" />
     <ClInclude Include="Source\sharedefs.h" />
     <ClInclude Include="Source\Tools\Messages.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="NewSettlers4Project1.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
