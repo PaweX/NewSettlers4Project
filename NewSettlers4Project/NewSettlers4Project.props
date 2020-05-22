@@ -2,8 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <GLFW_WIN32_DIR>-YOUR_GLFW_DIR-\glfw-3.3.2.bin.WIN32</GLFW_WIN32_DIR>
-    <GLEW_DIR>-YOUR_GLEW_DIR-\glew-2.1.0</GLEW_DIR>
+    <GLFW_WIN32_DIR>E:\Programowanie\Biblioteki\openGL\glfw-3.3.2.bin.WIN32</GLFW_WIN32_DIR>
+    <GLEW_DIR>E:\Programowanie\Biblioteki\openGL\glew-2.1.0</GLEW_DIR>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
