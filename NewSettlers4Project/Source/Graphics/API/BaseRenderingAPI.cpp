@@ -23,13 +23,13 @@
 #include "BaseRenderingAPI.h"
 
 //----------------------------------------------------------------
-CBaseRenderingAPI* CBaseRenderingAPI::instance = nullptr;
+IBaseRenderingAPI* IBaseRenderingAPI::instance = nullptr;
 
 
 //----------------------------------------------------------------
 // CONSTRUCTOR
 //----------------------------------------------------------------
-CBaseRenderingAPI::CBaseRenderingAPI()
+IBaseRenderingAPI::IBaseRenderingAPI()
 {
 	// Check if the instance is null and save it.
 	if (instance != nullptr)
@@ -45,12 +45,12 @@ CBaseRenderingAPI::CBaseRenderingAPI()
 //----------------------------------------------------------------
 
 // GetInstance method
-/*CBaseRenderingAPI* CBaseRenderingAPI::GetInstance()
+/*IBaseRenderingAPI* IBaseRenderingAPI::GetInstance()
 {
 	if (instance == nullptr)
 		throw except_A_RENDERING_API_NOT_CREATED;
 	else
-		return CBaseRenderingAPI::instance;
+		return IBaseRenderingAPI::instance;
 }*/
 //----------------------------------------------------------------
 

@@ -61,6 +61,10 @@ private:
 			excMessagesArray[except_GRAPHICS_MANAGER_NOT_CREATED]		= "CGraphicsManager instance not existing!";
 			excMessagesArray[except_RENDERING_MEDIATOR_ALREADY_EXISTS]	= "CRenderingMediator instance already existing!";
 			excMessagesArray[except_RENDERING_MEDIATOR_NOT_CREATED]		= "CRenderingMediator instance not existing!";
+			excMessagesArray[except_A_RENDERING_API_ALREADY_EXISTS]		= "CRenderingAPI instance already existing!";
+			excMessagesArray[except_A_RENDERING_API_NOT_CREATED]		= "CRenderingAPI instance not existing!";
+			excMessagesArray[except_GAME_SETTINGS_ALREADY_EXISTS]		= "CGameSettings instance already existing!";
+			excMessagesArray[except_GAME_SETTINGS_NOT_CREATED]			= "CGameSettings instance not existing!";
 		}
 
 

@@ -15,80 +15,66 @@
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  _____                 _     _          __  __                                                          
-// / ____|               | |   (_)        |  \/  |                                                         
-//| |  __ _ __ __ _ _ __ | |__  _  ___ ___| \  / | __ _ _ __   __ _  __ _  ___ _ __        ___ _ __  _ __  
-//| | |_ | '__/ _` | '_ \| '_ \| |/ __/ __| |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|      / __| '_ \| '_ \ 
-//| |__| | | | (_| | |_) | | | | | (__\__ \ |  | | (_| | | | | (_| | (_| |  __/ |     _  | (__| |_) | |_) |
-// \_____|_|  \__,_| .__/|_| |_|_|\___|___/_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|    (_)  \___| .__/| .__/ 
-//                 | |                                               __/ |                    | |   | |    
-//                 |_|                                              |___/                     |_|   |_|    
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+//  _____                       _____      _   _   _                                        
+// / ____|                     / ____|    | | | | (_)                                       
+//| |  __  __ _ _ __ ___   ___| (___   ___| |_| |_ _ _ __   __ _ ___        ___ _ __  _ __  
+//| | |_ |/ _` | '_ ` _ \ / _ \\___ \ / _ \ __| __| | '_ \ / _` / __|      / __| '_ \| '_ \ 
+//| |__| | (_| | | | | | |  __/____) |  __/ |_| |_| | | | | (_| \__ \  _  | (__| |_) | |_) |
+// \_____|\__,_|_| |_| |_|\___|_____/ \___|\__|\__|_|_| |_|\__, |___/ (_)  \___| .__/| .__/ 
+//                                                          __/ |              | |   | |    
+//                                                         |___/               |_|   |_|    
+////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "Messages.h"
-#include "GameApplication.h"
-#include "GraphicsManager.h"
-#include "RenderingMediator.h"
+#include "GameSettings.h"
 
 //----------------------------------------------------------------
-CGraphicsManager* CGraphicsManager::instance = nullptr;
-CRenderingMediator* CGraphicsManager::renderingMediator = nullptr;
 
 
 //----------------------------------------------------------------
 // CONSTRUCTOR
 //----------------------------------------------------------------
-CGraphicsManager::CGraphicsManager()
+CGameSettings::CGameSettings()
 {
-	// Check if the instance is null and save it.
-	if (instance != nullptr)
-		throw except_GRAPHICS_MANAGER_ALREADY_EXISTS;
-	else
-		instance = this;
+	// INFO: Checking if the instance is null is done in CGameApplication
 
-
-	// Create Rendering Mediator
-	try
-	{
-		renderingMediator = new CRenderingMediator();
-	}
-	catch (ExceptionNr exc)
-	{
-		// Display exception error message
-		MESSAGE::Exception(exc, __FILENAME__);
-	}
+	// Load settings - must be last
+	LoadSettingsFromTheFile();
 }
 //----------------------------------------------------------------
 
 //----------------------------------------------------------------
 // DESTRUCTOR
 //----------------------------------------------------------------
-CGraphicsManager::~CGraphicsManager()
+CGameSettings::~CGameSettings()
 {
-	// Remove Rendering Mediator
-	if (renderingMediator != nullptr)
-		delete renderingMediator;
+}
+//----------------------------------------------------------------
 
 
-	// At the end clear pointer of this instance
-	instance = nullptr;
+//----------------------------------------------------------------
+// Private Methods
+//----------------------------------------------------------------
+
+
+// Loads settings from the game settings file - if it exists
+void CGameSettings::LoadSettingsFromTheFile() const
+{
+	
+}
+//----------------------------------------------------------------
+
+// Saves settings to the game settings file
+void CGameSettings::SaveSettingsToTheFile()
+{
+
 }
 //----------------------------------------------------------------
 
 
 //----------------------------------------------------------------
 // Public Methods
-//----------------------------------------------------------------
-
-// GetInstance method
-/*CGraphicsManager* CGraphicsManager::GetInstance()
-{
-	if (instance == nullptr)
-		throw except_GRAPHICS_MANAGER_NOT_CREATED;
-	else
-		return CGraphicsManager::instance;
-}*/
 //----------------------------------------------------------------
 
 

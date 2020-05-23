@@ -15,6 +15,16 @@
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// _____                _           _             __  __          _ _       _                                    
+//|  __ \              | |         (_)           |  \/  |        | (_)     | |                                   
+//| |__) |___ _ __   __| | ___ _ __ _ _ __   __ _| \  / | ___  __| |_  __ _| |_ ___  _ __        ___ _ __  _ __  
+//|  _  // _ \ '_ \ / _` |/ _ \ '__| | '_ \ / _` | |\/| |/ _ \/ _` | |/ _` | __/ _ \| '__|      / __| '_ \| '_ \ 
+//| | \ \  __/ | | | (_| |  __/ |  | | | | | (_| | |  | |  __/ (_| | | (_| | || (_) | |     _  | (__| |_) | |_) |
+//|_|  \_\___|_| |_|\__,_|\___|_|  |_|_| |_|\__, |_|  |_|\___|\__,_|_|\__,_|\__\___/|_|    (_)  \___| .__/| .__/ 
+//                                           __/ |                                                  | |   | |    
+//                                          |___/                                                   |_|   |_|    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "Messages.h"
 #include "GameApplication.h"
@@ -24,7 +34,7 @@
 
 //----------------------------------------------------------------
 CRenderingMediator* CRenderingMediator::instance = nullptr;
-CBaseRenderingAPI* CRenderingMediator::renderingAPI = nullptr;
+IBaseRenderingAPI* CRenderingMediator::renderingAPI = nullptr;
 
 
 //----------------------------------------------------------------
@@ -66,7 +76,7 @@ void CRenderingMediator::CreateRenderingAPI(API_Type apiType)
 	try
 	{
 		// Create API that is currently selected in the Game Graphics Settings
-		renderingAPI = new CBaseRenderingAPI(); // TODO: PawelC: We need to create an object of chosen API (can be changed in game options) not BaseClass API object!!
+		renderingAPI = new IBaseRenderingAPI(); // TODO: PawelC: We need to create an object of chosen API (can be changed in game options) not BaseClass API object!!
 	}
 	catch (ExceptionNr exc)
 	{

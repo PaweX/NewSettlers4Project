@@ -23,9 +23,20 @@
 #include "sharedefs.h"
 
 
+class CGameSettings;
 class CGraphicsManager;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
+//  _____                                           _ _           _   _                   _     
+// / ____|                        /\               | (_)         | | (_)                 | |    
+//| |  __  __ _ _ __ ___   ___   /  \   _ __  _ __ | |_  ___ __ _| |_ _  ___  _ __       | |__  
+//| | |_ |/ _` | '_ ` _ \ / _ \ / /\ \ | '_ \| '_ \| | |/ __/ _` | __| |/ _ \| '_ \      | '_ \ 
+//| |__| | (_| | | | | | |  __// ____ \| |_) | |_) | | | (_| (_| | |_| | (_) | | | |  _  | | | |
+// \_____|\__,_|_| |_| |_|\___/_/    \_\ .__/| .__/|_|_|\___\__,_|\__|_|\___/|_| |_| (_) |_| |_|
+//                                     | |   | |                                                
+//                                     |_|   |_|                                                
+////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 // DESCRIPTION: It is a main game class. It rules the whole game (Graphics, Logic etc.).
 // ------------
 // EXTRA INFO: Constructor throws an exception of type 'ExceptionNr' when the instance already exists.
@@ -38,6 +49,7 @@ private: // Fields
 	static CGameApplication* instance; // The instance of this class
 
 	// dependent singletons
+	static CGameSettings* gameSettings; // The instance of CGameSettings
 	static CGraphicsManager* graphicsManager; // The instance of CGraphicsManager
 
 private: // Methods 
@@ -47,6 +59,8 @@ public: // Methods
 	~CGameApplication(); // Destructor
 
 	static CGameApplication* GetInstance();
+	
+	CGameSettings* GetGameSettings() const;
 
 	void StartAndRun();
 };

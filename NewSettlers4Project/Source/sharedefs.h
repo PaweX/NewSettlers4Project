@@ -36,6 +36,8 @@ const enum ExceptionNr
 	except_RENDERING_MEDIATOR_NOT_CREATED,
 	except_A_RENDERING_API_ALREADY_EXISTS,
 	except_A_RENDERING_API_NOT_CREATED,
+	except_GAME_SETTINGS_ALREADY_EXISTS,
+	except_GAME_SETTINGS_NOT_CREATED,
 
 	except_COUNT // must be last
 };

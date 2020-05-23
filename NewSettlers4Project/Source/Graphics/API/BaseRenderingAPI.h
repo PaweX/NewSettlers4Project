@@ -33,20 +33,20 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //// SINGLETON CLASS - but only from inheriting classes ////
 //// ONLY ONE OBJECT OF ALL INHERITING CLASSES IS ALLOWED AT ONE TIME ////
-class CBaseRenderingAPI
+class IBaseRenderingAPI
 {
 	// Friends:
 	friend class CRenderingMediator;
 
 private: // Fields
-	static CBaseRenderingAPI* instance; // The only one instance considering all inheriting classes.
+	static IBaseRenderingAPI* instance; // The only one instance considering all inheriting classes.
 
 protected: // Methods 
-	CBaseRenderingAPI(); // Constructor
-	virtual ~CBaseRenderingAPI() { instance = nullptr; } // Destructor
+	IBaseRenderingAPI(); // Constructor
+	virtual ~IBaseRenderingAPI() { instance = nullptr; } // Destructor
 	
 public: // Methods
-	//static CRenderingMediator* GetInstance();
+	//static IBaseRenderingAPI* GetInstance();
 
 };
 
