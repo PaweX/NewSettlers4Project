@@ -17,28 +17,17 @@
 *******************************************************************************/
 
 #include "Messages.h"
-#include "GameApplication.h"
-#include "GraphicsManager.h"
-#include "RenderingMediator.h"
 #include "BaseRenderingAPI.h"
+#include "OpenGL_API.h"
 
-//----------------------------------------------------------------
-IBaseRenderingAPI* IBaseRenderingAPI::instance = nullptr;
 
 
 //----------------------------------------------------------------
 // CONSTRUCTOR
 //----------------------------------------------------------------
-IBaseRenderingAPI::IBaseRenderingAPI()
+COpenGL_API::COpenGL_API()
 {
-	// Check if the instance is null and save it.
-	if (instance != nullptr)
-		throw except_A_RENDERING_API_ALREADY_EXISTS;
-	else
-		instance = this;
-
-	// Get the rendering mediator singleton
-	renderingMed = CRenderingMediator::GetInstance();
+	API_type = API_OpenGl;
 }
 //----------------------------------------------------------------
 
@@ -47,15 +36,6 @@ IBaseRenderingAPI::IBaseRenderingAPI()
 // Public Methods
 //----------------------------------------------------------------
 
-// GetInstance method
-IBaseRenderingAPI* IBaseRenderingAPI::GetInstance()
-{
-	if (instance == nullptr)
-		throw except_A_RENDERING_API_NOT_CREATED;
-	else
-		return IBaseRenderingAPI::instance;
-}
-//----------------------------------------------------------------
 
 
 

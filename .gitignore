@@ -3,8 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# My custom files (manually edited)
-
+# My custom files and directories (manually edited)
+*.dia.autosave
+[Gg]ame [Dd]esign
 
 # User-specific files
 *.rsuser

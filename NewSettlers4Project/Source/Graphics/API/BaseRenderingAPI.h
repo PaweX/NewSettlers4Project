@@ -38,15 +38,21 @@ class IBaseRenderingAPI
 	// Friends:
 	friend class CRenderingMediator;
 
-private: // Fields
+protected: // Fields
 	static IBaseRenderingAPI* instance; // The only one instance considering all inheriting classes.
+
+	CRenderingMediator* renderingMed; // The Rendering Mediator singleton
+
+	API_Type API_type = API_CURRENT_API;
 
 protected: // Methods 
 	IBaseRenderingAPI(); // Constructor
 	virtual ~IBaseRenderingAPI() { instance = nullptr; } // Destructor
 	
 public: // Methods
-	//static IBaseRenderingAPI* GetInstance();
+	static IBaseRenderingAPI* GetInstance();
+
+	API_Type GetAPI_Type() const { return API_type; }
 
 };
 

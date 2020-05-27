@@ -1,3 +1,4 @@
+#pragma once
 /////////////////////////////////////////////////////////////////
 //////////////////// New Settlers IV Project ////////////////////
 /////////////////////////////////////////////////////////////////
@@ -16,47 +17,35 @@
 * DEALINGS IN THE SOFTWARE.
 *******************************************************************************/
 
-#include "Messages.h"
-#include "GameApplication.h"
-#include "GraphicsManager.h"
-#include "RenderingMediator.h"
-#include "BaseRenderingAPI.h"
+#ifndef H_OPENGL_API
+#define H_OPENGL_API
 
-//----------------------------------------------------------------
-IBaseRenderingAPI* IBaseRenderingAPI::instance = nullptr;
+#include "sharedefs.h"
 
 
-//----------------------------------------------------------------
-// CONSTRUCTOR
-//----------------------------------------------------------------
-IBaseRenderingAPI::IBaseRenderingAPI()
+class IBaseRenderingAPI;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// DESCRIPTION: Class for OpenGL API, it translates rendering functions for OpenGL.
+// ------------
+// EXTRA INFO: See CBaseRendering
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//// SINGLETON CLASS - see CBaseRendering ////
+//// ONLY ONE OBJECT OF ALL INHERITING CLASSES IS ALLOWED AT ONE TIME ////
+class COpenGL_API : public IBaseRenderingAPI
 {
-	// Check if the instance is null and save it.
-	if (instance != nullptr)
-		throw except_A_RENDERING_API_ALREADY_EXISTS;
-	else
-		instance = this;
+	// Friends:
+	friend class CRenderingMediator;
 
-	// Get the rendering mediator singleton
-	renderingMed = CRenderingMediator::GetInstance();
-}
-//----------------------------------------------------------------
+private: // Fields
 
+protected: // Methods 
+	COpenGL_API(); // Constructor
+	//virtual ~COpenGL_API(); // Destructor
+	
+public: // Methods
 
-//----------------------------------------------------------------
-// Public Methods
-//----------------------------------------------------------------
-
-// GetInstance method
-IBaseRenderingAPI* IBaseRenderingAPI::GetInstance()
-{
-	if (instance == nullptr)
-		throw except_A_RENDERING_API_NOT_CREATED;
-	else
-		return IBaseRenderingAPI::instance;
-}
-//----------------------------------------------------------------
+};
 
 
-
-//----------------------------------------------------------------
+#endif // H_OPENGL_API

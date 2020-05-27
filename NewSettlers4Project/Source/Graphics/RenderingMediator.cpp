@@ -27,10 +27,12 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "Messages.h"
+#include "GameSettings.h"
 #include "GameApplication.h"
 #include "GraphicsManager.h"
 #include "RenderingMediator.h"
 #include "BaseRenderingAPI.h"
+#include "OpenGL_API.h"
 
 //----------------------------------------------------------------
 CRenderingMediator* CRenderingMediator::instance = nullptr;
@@ -48,9 +50,12 @@ CRenderingMediator::CRenderingMediator()
 	else
 		instance = this;
 
+	// Get the game app singleton - must be before CreateRenderingAPI()
+	gameApp = CGameApplication::GetInstance();
+
 
 	// Create Rendering API basing on the Game Graphics Settings
-	CreateRenderingAPI();
+	CreateRenderingAPI(gameApp->GetGameSettings()->graphics.currentAPI);
 }
 //----------------------------------------------------------------
 
@@ -76,7 +81,25 @@ void CRenderingMediator::CreateRenderingAPI(API_Type apiType)
 	try
 	{
 		// Create API that is currently selected in the Game Graphics Settings
-		renderingAPI = new IBaseRenderingAPI(); // TODO: PawelC: We need to create an object of chosen API (can be changed in game options) not BaseClass API object!!
+		switch (apiType)
+		{
+			case API_Vulkan:
+			{
+
+			}
+
+			case API_DirectX:
+			{
+
+			}
+
+			case API_OpenGl:
+			default:
+			{
+				renderingAPI = new COpenGL_API();
+				break;
+			}
+		}
 	}
 	catch (ExceptionNr exc)
 	{
@@ -99,13 +122,13 @@ void CRenderingMediator::RemoveRenderingAPI()
 //----------------------------------------------------------------
 
 // GetInstance method
-/*CRenderingMediator* CRenderingMediator::GetInstance()
+CRenderingMediator* CRenderingMediator::GetInstance()
 {
 	if (instance == nullptr)
 		throw except_RENDERING_MEDIATOR_NOT_CREATED;
 	else
 		return CRenderingMediator::instance;
-}*/
+}
 //----------------------------------------------------------------
 
 

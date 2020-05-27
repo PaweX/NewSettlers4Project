@@ -22,6 +22,7 @@
     <ClCompile Include="Source\GameApplication.cpp" />
     <ClCompile Include="Source\GameSettings.cpp" />
     <ClCompile Include="Source\Graphics\API\BaseRenderingAPI.cpp" />
+    <ClCompile Include="Source\Graphics\API\OpenGL_API.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsManager.cpp" />
     <ClCompile Include="Source\Graphics\RenderingMediator.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -31,6 +32,7 @@
     <ClInclude Include="Source\GameApplication.h" />
     <ClInclude Include="Source\GameSettings.h" />
     <ClInclude Include="Source\Graphics\API\BaseRenderingAPI.h" />
+    <ClInclude Include="Source\Graphics\API\OpenGL_API.h" />
     <ClInclude Include="Source\Graphics\GraphicsManager.h" />
     <ClInclude Include="Source\Graphics\RenderingMediator.h" />
     <ClInclude Include="Source\sharedefs.h" />

@@ -51,6 +51,8 @@ class CRenderingMediator
 private: // Fields
 	static CRenderingMediator* instance; // The instance
 
+	CGameApplication* gameApp; // The Game Application singleton
+
 	// dependent singletons
 	static IBaseRenderingAPI* renderingAPI; // The instance of the current Rendering API class
 
@@ -67,7 +69,7 @@ private: // Methods
 	void RemoveRenderingAPI();
 
 public: // Methods
-	//static CRenderingMediator* GetInstance();
+	static CRenderingMediator* GetInstance();
 
 	void ChangeRenderingAPI(API_Type apiType); // Removes current API and creates new one
 };
