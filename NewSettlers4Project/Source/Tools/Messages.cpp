@@ -20,12 +20,16 @@
 #include <stdio.h>
 #include "Messages.h"
 
+
+//----------------------------------------------------------------
 //----------------------------------------------------------------
 // Initialize variables
+//----------------------------------------------------------------
 //----------------------------------------------------------------
 #ifdef _WIN32
 HANDLE MESSAGE::hConsole = nullptr;
 #endif
+std::mutex MESSAGE::mtx;
 //bool MESSAGE::bUseInGameConsole = false;
 
 
@@ -33,7 +37,9 @@ constexpr MESSAGE::ExceptionMessages MESSAGE::excMessages = MESSAGE::ExceptionMe
 
 
 //----------------------------------------------------------------
+//----------------------------------------------------------------
 // Private methods
+//----------------------------------------------------------------
 //----------------------------------------------------------------
 #ifdef _WIN32
 HANDLE MESSAGE::GetWindowsConsole()
@@ -47,37 +53,51 @@ HANDLE MESSAGE::GetWindowsConsole()
 //----------------------------------------------------------------
 
 //----------------------------------------------------------------
+//----------------------------------------------------------------
 // Public methods
 //----------------------------------------------------------------
-void MESSAGE::Normal(ExceptionNr excIndex, const char* cppFileName)
+//----------------------------------------------------------------
+void MESSAGE::Normal(ExceptionNr excIndex, const char* cppFileName, const char* lineNumberText)
 {
 	Normal(GetExceptionMsg(excIndex));
 }
 
-void MESSAGE::Normal(const char* msgString, const char* cppFileName, ...)
+void MESSAGE::Normal(const char* msgString, const char* cppFileName, const char* lineNumberText, ...)
 {
+	mtx.lock(); // Lock it for the thread
+
 	va_list args;
 	va_start(args, msgString);
 
-	//printf("Message: ");
+	const char* threadName = GetThreadName();
+	if (threadName != "")
+		printf("[%s]: ", threadName);
+
+	//printf("[Message]: ");
 
 	if (cppFileName != "")
-		printf("%s: ", cppFileName);
+		printf("[File %s]: ", cppFileName);
+	if (lineNumberText != "")
+		printf("[Line %s]: ", lineNumberText);
 
 	vprintf(msgString, args);
 	printf("\n");
 
 	va_end(args);
+
+	mtx.unlock(); // Unlock it
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Info(ExceptionNr excIndex, const char* cppFileName)
+void MESSAGE::Info(ExceptionNr excIndex, const char* cppFileName, const char* lineNumberText)
 {
 	Info(GetExceptionMsg(excIndex));
 }
 
-void MESSAGE::Info(const char* infoString, const char* cppFileName, ...)
+void MESSAGE::Info(const char* infoString, const char* cppFileName, const char* lineNumberText, ...)
 {
+	mtx.lock(); // Lock it for the thread
+
 	va_list args;
 	va_start(args, infoString);
 
@@ -87,10 +107,16 @@ void MESSAGE::Info(const char* infoString, const char* cppFileName, ...)
 	SetConsoleTextAttribute(GetWindowsConsole(), 9); // set color to blue in Windows console
 #endif // ! _WIN32
 
-	//printf("INFORMATION: ");
+	const char* threadName = GetThreadName();
+	if (threadName != "")
+		printf("[%s]: ", threadName);
+
+	//printf("[INFORMATION]: ");
 
 	if (cppFileName != "")
-		printf("%s: ", cppFileName);
+		printf("[File %s]: ", cppFileName);
+	if (lineNumberText != "")
+		printf("[Line %s]: ", lineNumberText);
 
 	vprintf(infoString, args);
 	printf("\n");
@@ -102,16 +128,20 @@ void MESSAGE::Info(const char* infoString, const char* cppFileName, ...)
 #endif // ! _WIN32
 
 	va_end(args);
+
+	mtx.unlock(); // Unlock it
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Warning(ExceptionNr excIndex, const char* cppFileName)
+void MESSAGE::Warning(ExceptionNr excIndex, const char* cppFileName, const char* lineNumberText)
 {
 	Warning(GetExceptionMsg(excIndex));
 }
 
-void MESSAGE::Warning(const char* warnString, const char* cppFileName, ...)
+void MESSAGE::Warning(const char* warnString, const char* cppFileName, const char* lineNumberText, ...)
 {
+	mtx.lock(); // Lock it for the thread
+
 	va_list args;
 	va_start(args, warnString);
 
@@ -121,10 +151,16 @@ void MESSAGE::Warning(const char* warnString, const char* cppFileName, ...)
 	SetConsoleTextAttribute(GetWindowsConsole(), 14); // set color to yellow in Windows console
 #endif // ! _WIN32
 
-	printf("WARNING: ");
+	const char* threadName = GetThreadName();
+	if (threadName != "")
+		printf("[%s]: ", threadName);
+
+	printf("[WARNING]: ");
 
 	if (cppFileName != "")
-		printf("%s: ", cppFileName);
+		printf("[File %s]: ", cppFileName);
+	if (lineNumberText != "")
+		printf("[Line %s]: ", lineNumberText);
 
 	vprintf(warnString, args);
 	printf("\n");
@@ -136,16 +172,20 @@ void MESSAGE::Warning(const char* warnString, const char* cppFileName, ...)
 #endif // ! _WIN32
 
 	va_end(args);
+
+	mtx.unlock(); // Unlock it
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Error(ExceptionNr excIndex, const char* cppFileName)
+void MESSAGE::Error(ExceptionNr excIndex, const char* cppFileName, const char* lineNumberText)
 {
 	Error(GetExceptionMsg(excIndex), cppFileName);
 }
 
-void MESSAGE::Error(const char* errorString, const char* cppFileName, ...)
+void MESSAGE::Error(const char* errorString, const char* cppFileName, const char* lineNumberText, ...)
 {
+	mtx.lock(); // Lock it for the thread
+
 	va_list args;
 	va_start(args, errorString);
 
@@ -155,10 +195,16 @@ void MESSAGE::Error(const char* errorString, const char* cppFileName, ...)
 	SetConsoleTextAttribute(GetWindowsConsole(), 12); // set color to red in Windows console
 #endif // ! _WIN32
 
-	printf("ERROR: ");
+	const char* threadName = GetThreadName();
+	if (threadName != "")
+		printf("[%s]: ", threadName);
+
+	printf("[ERROR]: ");
 
 	if (cppFileName != "")
-		printf("%s: ", cppFileName);
+		printf("[File %s]: ", cppFileName);
+	if (lineNumberText != "")
+		printf("[Line %s]: ", lineNumberText);
 
 	vprintf(errorString, args);
 	printf("\n");
@@ -170,16 +216,20 @@ void MESSAGE::Error(const char* errorString, const char* cppFileName, ...)
 #endif // ! _WIN32
 
 	va_end(args);
+
+	mtx.unlock(); // Unlock it
 }
 //----------------------------------------------------------------
 
-void MESSAGE::Exception(ExceptionNr excIndex, const char* cppFileName)
+void MESSAGE::Exception(ExceptionNr excIndex, const char* cppFileName, const char* lineNumberText)
 {
 	Exception(GetExceptionMsg(excIndex), cppFileName);
 }
 
-void MESSAGE::Exception(const char* exceptionString, const char* cppFileName, ...)
+void MESSAGE::Exception(const char* exceptionString, const char* cppFileName, const char* lineNumberText, ...)
 {
+	mtx.lock(); // Lock it for the thread
+
 	va_list args;
 	va_start(args, exceptionString);
 
@@ -189,10 +239,16 @@ void MESSAGE::Exception(const char* exceptionString, const char* cppFileName, ..
 	SetConsoleTextAttribute(GetWindowsConsole(), 207); // set color to white on red background in Windows console
 #endif // ! _WIN32
 
-	printf("EXCEPTION: ");
+	const char* threadName = GetThreadName();
+	if (threadName != "")
+		printf("[%s]: ", threadName);
+
+	printf("[EXCEPTION]: ");
 
 	if (cppFileName != "")
-		printf("Caught in %s: ", cppFileName);
+		printf("[Caught in %s]: ", cppFileName);
+	if (lineNumberText != "")
+		printf("[Line %s]: ", lineNumberText);
 
 	vprintf(exceptionString, args);
 	printf("\n");
@@ -204,5 +260,7 @@ void MESSAGE::Exception(const char* exceptionString, const char* cppFileName, ..
 #endif // ! _WIN32
 
 	va_end(args);
+
+	mtx.unlock(); // Unlock it
 }
 //----------------------------------------------------------------

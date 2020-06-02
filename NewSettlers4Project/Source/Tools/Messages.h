@@ -22,6 +22,7 @@
 #include <windows.h>
 #endif
 #include <string.h>
+#include <mutex>
 #include "sharedefs.h"
 
 #ifdef _WIN32
@@ -42,6 +43,7 @@ private:
 	static HANDLE hConsole;
 	static HANDLE GetWindowsConsole();
 #endif
+	static std::mutex mtx;
 
 	//static bool bUseInGameConsole;
 
@@ -79,22 +81,28 @@ private:
 
 	static const ExceptionMessages excMessages;
 
+
+private: // Fields
+	static const char* GetThreadName() { return ""; }
+
+
 public: // Fields
+
 
 
 public:
 	static const char* GetExceptionMsg(unsigned msgIndex) { return excMessages.GetExcText(msgIndex); }
 
-	static void Normal(ExceptionNr excIndex, const char* cppFileName = "");
-	static void Normal(const char* msgString, const char* cppFileName = "", ...);
-	static void Info(ExceptionNr excIndex, const char* cppFileName = "");
-	static void Info(const char* msgString, const char* cppFileName = "", ...);
-	static void Warning(ExceptionNr excIndex, const char* cppFileName = "");
-	static void Warning(const char* warnString, const char* cppFileName = "", ...);
-	static void Error(ExceptionNr excIndex, const char* cppFileName = "");
-	static void Error(const char* errorString, const char* cppFileName = "", ...);
-	static void Exception(ExceptionNr excIndex, const char* cppFileName = "");
-	static void Exception(const char* errorString, const char* cppFileName = "", ...);
+	static void Normal(ExceptionNr excIndex, const char* cppFileName = "", const char* lineNumberText = "");
+	static void Normal(const char* msgString, const char* cppFileName = "", const char* lineNumberText = "", ...);
+	static void Info(ExceptionNr excIndex, const char* cppFileName = "", const char* lineNumberText = "");
+	static void Info(const char* msgString, const char* cppFileName = "", const char* lineNumberText = "", ...);
+	static void Warning(ExceptionNr excIndex, const char* cppFileName = "", const char* lineNumberText = "");
+	static void Warning(const char* warnString, const char* cppFileName = "", const char* lineNumberText = "", ...);
+	static void Error(ExceptionNr excIndex, const char* cppFileName = "", const char* lineNumberText = "");
+	static void Error(const char* errorString, const char* cppFileName = "", const char* lineNumberText = "", ...);
+	static void Exception(ExceptionNr excIndex, const char* cppFileName = "", const char* lineNumberText = "");
+	static void Exception(const char* errorString, const char* cppFileName = "", const char* lineNumberText = "", ...);
 
 
 private:
