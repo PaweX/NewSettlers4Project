@@ -30,5 +30,5 @@ https://discord.gg/qsetQRb
 I am more game designer than programmer. I can program, however when it comes to complex maths calculations, I feel lost. If you want to help, then join the project and let's make an open, free version of Settlers IV with extras - under the MIT license.
 
 ## Program design
-** Please note that the design is on "work in progress" status **
+**Please note that the design is on "work in progress" status**
 ![Class design](https://raw.githubusercontent.com/PaweX/NewSettlers4Project/master/NewSettlers4Project/S4New.png)
