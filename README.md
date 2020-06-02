@@ -22,9 +22,12 @@ A remake of The Settlers IV: *The New Settlers IV* - a copy of the original game
 - playable Dark Tribe
 - more advanced map editor that is compatible with the original one as much as possible
 
-## Discord Server - Settlers IV Modding
+## Discord server - Settlers IV Modding
 https://discord.gg/qsetQRb
 
 ## Are you interested in the project?
 
 I am more game designer than programmer. I can program, however when it comes to complex maths calculations, I feel lost. If you want to help, then join the project and let's make an open, free version of Settlers IV with extras - under the MIT license.
+
+## Program design
+![Class design](https://raw.githubusercontent.com/PaweX/NewSettlers4Project/master/NewSettlers4Project/S4New.png)
