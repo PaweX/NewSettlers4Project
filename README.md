@@ -1,3 +1,6 @@
+# New project available:
+This project tried to reconstruct the original files layout, but the proper S4 remake project is now here https://github.com/PaweX/reSettlers4 .
+
 # NewSettlers4Project
 A remake of The Settlers IV: *The New Settlers IV* - a copy of the original game with extra features. New features are meant to improve the game without changing the basis.
 
